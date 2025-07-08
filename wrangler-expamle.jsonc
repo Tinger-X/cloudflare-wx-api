@@ -1,0 +1,55 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "wx-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-06-04",
+	"routes": [
+		{
+			"pattern": "wx-api.your-domain.com",  // 域名
+			"custom_domain": true
+		}
+	],
+	"assets": {
+		"directory": "./public",
+		"binding": "Assets",
+		"run_worker_first": false,
+		"not_found_handling": "404-page"
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "Durable",
+				"name": "Durable"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"new_sqlite_classes": [
+				"Durable"
+			],
+			"tag": "v1"
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"AppID": "your-app-id",  // 服务号的AppID
+		"AppToken": "your-app-token",  // 设置的Token
+		"AppSecret": "your-app-secret",  // 设置的Secret
+		"AppAesKey": "your-app-aes-key",  // 设置的AesKey
+		"AesMode": true,  // true: 安全模式, false: 明文模式
+		"InitAuth": "your-init-auth",  // 初始化的认证密码
+		"AllowOrigin": "wx-api.your-domain.com",  // 允许的前端列表
+		"TicketSize": 32,  // 登录凭证长度
+		"TicketPrefix": "YourTokenPrefix-",  // 登录凭证前缀
+		"AuthExpireSecs": 300,  // 二维码有效期
+		"LLMModelId": "@cf/qwen/qwen1.5-0.5b-chat",  // LLM模型ID
+		"LLMMaxLength": 1024,  // 生成内容的最大长度
+		"LLMLastMsg": "/pre"  // 获取上一次未及时回复的内容
+	},
+	"ai": {
+		"binding": "AI"
+	}
+}

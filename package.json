@@ -1,20 +1,16 @@
 {
-  "name": "wx-api",
-  "version": "v1.0",
-  "devDependencies": {
-    "wrangler": "3.99.0"
-  },
-  "private": true,
-  "scripts": {
-    "build": "esbuild src/index.js --bundle --platform=node --format=esm --outfile=dist/index.js",
-    "start": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
-  },
-  "dependencies": {
-    "buffer": "^6.0.3",
-    "crypto-js": "^4.2.0",
-    "esbuild": "^0.24.2",
-    "fast-xml-parser": "^4.5.1",
-    "qrcode-svg": "^1.1.0"
-  }
+	"name": "wx-api",
+	"version": "2.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev"
+	},
+	"devDependencies": {
+		"@types/qrcode-svg": "^1.1.5",
+		"fast-xml-parser": "^4.5.1",
+		"qrcode-svg": "^1.1.0",
+		"typescript": "^5.5.2",
+		"wrangler": "^4.20.0"
+	}
 }

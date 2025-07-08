@@ -1,4 +1,4 @@
-.wrangler
-wrangler.toml
-node_modules
-dist
+/.vscode
+/.wrangler
+/node_modules
+/wrangler.jsonc
