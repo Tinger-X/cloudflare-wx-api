@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 import { Utils } from "./utils";
-import { ChatMessage, SseMessage, SysPrompt } from "./shard.d";
+import { ChatMessage, SseMessage } from "./shard.d";
 
 export class Durable extends DurableObject {
   #ChatHistory: Map<string, ChatMessage[]>;
@@ -12,6 +12,7 @@ export class Durable extends DurableObject {
   #AllowOrigin: string;
   #TicketPrefix: string;
   #TicketSize: number;
+  #SystemTip: string;
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
@@ -24,6 +25,20 @@ export class Durable extends DurableObject {
     this.#AllowOrigin = env.AllowOrigin;
     this.#TicketPrefix = env.TicketPrefix;
     this.#TicketSize = env.TicketSize;
+    this.#SystemTip = env.LLMSystemTip;
+    ctx.storage.sql.exec(
+      "CREATE TABLE IF NOT EXISTS `messages` (`uid` CHAR(28), `role` VCHAR(9), `content` TEXT);",
+    );
+    const cursor = ctx.storage.sql.exec("SELECT * FROM `messages`;");
+    for (const row of cursor) {
+      const uid = row.uid as string;
+      const role = row.role as "system" | "user" | "assistant";
+      const content = row.content as string;
+      if (!this.#ChatHistory.has(uid)) {
+        this.#ChatHistory.set(uid, []);
+      }
+      this.#ChatHistory.get(uid)!.push({ role, content });
+    }
   }
 
   #expireAuthCode(code: string, uid: string): void {
@@ -158,9 +173,12 @@ export class Durable extends DurableObject {
 
   handleUpdateChatHistory(uid: string, msg: ChatMessage): ChatMessage[] {
     let history = this.#ChatHistory.get(uid);
-    if (!history) history = [SysPrompt];
+    if (!history) history = [{ role: "system", content: this.#SystemTip }];
     history.push(msg);
     this.#ChatHistory.set(uid, history);
+    this.ctx.storage.sql.exec(
+      `INSERT INTO \`messages\` (\`uid\`, \`role\`, \`content\`) VALUES (?, ?, ?);`, uid, msg.role, msg.content
+    )
     return history;
   }
 
@@ -176,6 +194,7 @@ export class Durable extends DurableObject {
   }
 
   handleClearChatHistory(uid: string): string {
+    this.ctx.storage.sql.exec(`DELETE FROM \`messages\` WHERE \`uid\`='${uid}';`);
     if (!this.#ChatHistory.has(uid)) {
       return "【我已经不记得前世啦】";
     }

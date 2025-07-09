@@ -3,13 +3,6 @@ export interface ChatMessage {
   content: string;
 }
 
-const SysPrompt = {
-  role: "system",
-  content: "You are a helpful, friendly assistant. Provide concise and accurate responses."
-} as ChatMessage;
-
-export { SysPrompt }
-
 export interface SseMessage {
   code: number;
   data: any;

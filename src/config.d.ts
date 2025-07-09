@@ -18,6 +18,7 @@ declare namespace Cloudflare {
         AuthExpireSecs: number,
 		LLMModelId: keyof AiModels,
 		LLMMaxLength: number,
+        LLMSystemTip: string,
         LLMLastMsg: str
 	}
 }

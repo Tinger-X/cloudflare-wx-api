@@ -47,6 +47,7 @@
 		"AuthExpireSecs": 300,  // 二维码有效期
 		"LLMModelId": "@cf/qwen/qwen1.5-0.5b-chat",  // LLM模型ID
 		"LLMMaxLength": 1024,  // 生成内容的最大长度
+		"LLMSystemTip": "你是一个十分专业的、友好的助手。为我提供简洁准确的回答。",  // ai系统提示
 		"LLMLastMsg": "/pre"  // 获取上一次未及时回复的内容
 	},
 	"ai": {
