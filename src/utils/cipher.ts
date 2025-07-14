@@ -106,7 +106,7 @@ export class WxCipher {
       throw new Error(`AES decrypt error: ${e.message}`);
     }
     const decrypted: Uint8Array<ArrayBuffer> = new Uint8Array(decryptedBuffer);
-    // 此时 decrypted.length 是你最初手动 pad 后的字节数（32 的倍数）
+    // 此时 decrypted.length 是最初手动 pad 后的字节数（32 的倍数）
 
     // 6) 手动去掉 32 字节对齐的那层 PKCS#7
     const unpadded: Uint8Array<ArrayBuffer> = this.#pkcs7_unpad(decrypted);

@@ -33,14 +33,4 @@ export class Utils {
     resp.headers.set("Access-Control-Allow-Origin", origins);
     return resp;
   }
-
-  static async write_sse(writer: WritableStreamDefaultWriter<any>, data: any): Promise<boolean> {
-    const msg = `event: Notify\ndata: ${JSON.stringify(data)}\n\n`;
-    try {
-      await writer.write(Encoder.encode(msg));
-      return true;
-    } catch {
-      return false;
-    }
-  }
 }
