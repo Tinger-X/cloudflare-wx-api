@@ -1,5 +1,4 @@
 const StrBase: string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const Encoder = new TextEncoder()
 
 export class Utils {
   static random_string(size: number = 16, rules: string | undefined = undefined): string {
