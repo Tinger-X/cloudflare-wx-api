@@ -127,3 +127,7 @@ wxApiLogin.login(res => {
 3. 修改 `wrangler.jsonc` 中的 `routes.pattern`, `vars.*`
 4. 安装依赖：`npm i`
 5. 部署：`npm run deploy`
+
+## Star History
+
+![star history](https://www.star-history.com/#tinger-x/cloudflare-wx-api&Date)
