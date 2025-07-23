@@ -130,4 +130,5 @@ wxApiLogin.login(res => {
 
 ## Star History
 
-![star history](https://www.star-history.com/#tinger-x/cloudflare-wx-api&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=tinger-x/cloudflare-wx-api&type=Date)](https://www.star-history.com/#tinger-x/cloudflare-wx-api&Date)
+
