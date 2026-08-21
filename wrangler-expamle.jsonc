@@ -45,9 +45,9 @@
 		"TicketSize": 32,  // 登录凭证长度
 		"TicketPrefix": "YourTokenPrefix-",  // 登录凭证前缀
 		"AuthExpireSecs": 300,  // 二维码有效期
-		"LLMModelId": "@cf/qwen/qwen1.5-0.5b-chat",  // LLM模型ID
+		"LLMModelId": "@cf/meta/llama-3.2-3b-instruct",  // LLM模型ID
 		"LLMMaxLength": 1024,  // 生成内容的最大长度
-		"LLMSystemTip": "你是一个十分专业的、友好的助手。为我提供简洁准确的回答。",  // ai系统提示
+		"LLMSystemTip": "你是TinAI智能助手，友好简洁地回答粉丝提问。语言通俗，回复精炼，适合手机阅读，不要冗长。禁止“我是人工智能”之类套话。不清楚就直接说明，不要编造答案。可少量使用emoji。",  // ai系统提示
 		"LLMLastMsg": "/pre"  // 获取上一次未及时回复的内容
 	},
 	"ai": {
